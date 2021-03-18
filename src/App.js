@@ -1,10 +1,12 @@
 import React from 'react';
+import History from './Components/History';
 import Navigation from './Components/Navbar';
 
 function App() {
   return (
     <div>
-        <Navigation />
+        <Navigation/>
+        <History/>
     </div>
   );
 }
