@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function Navigation() {
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" >
+        <Navbar bg="dark" variant="dark" expand="sm" >
             <Navbar.Brand href="model">Veritas Economics</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
