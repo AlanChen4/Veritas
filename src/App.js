@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ChoiceModel from './Components/ChoiceModel';
-import History from './Components/History';
+import Output from './Components/Output';
+import Inputs from './Components/Inputs';
 import Navigation from './Components/Navbar';
 
 function App() {
@@ -11,7 +11,10 @@ function App() {
               <Navigation/>
               <Switch>
                   <Route path='/model'>
-                      <ChoiceModel/>
+                      <Inputs/>
+                  </Route>
+                  <Route path='/output'>
+                      <Output/>
                   </Route>
                   <Route path='/contact'>
                       <h1>contact</h1>
@@ -23,7 +26,7 @@ function App() {
                       <h1>help</h1>
                   </Route>
                   <Route path='/'>
-                      <ChoiceModel/>
+                      <Inputs/>
                   </Route>
               </Switch>
           </div>
