@@ -1,6 +1,6 @@
 const off_peak_choices = [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09];
 const off_peak_inputs = off_peak_choices.map(choice =>
-    <option value={choice} label={`$${choice}`}></option>
+    <option key={choice} value={choice} label={`$${choice}`}></option>
 );
 
 const peak_price_choices = [
@@ -11,7 +11,7 @@ const peak_price_choices = [
     0.41, 0.42, 0.43, 0.44, 0.45
 ];
 const peak_price_inputs = peak_price_choices.map(choice =>
-    <option value={choice} label={`$${choice}`}></option>
+    <option key={choice} value={choice} label={`$${choice}`}></option>
 );
 
 const peak_period_choices = [
@@ -23,12 +23,12 @@ const peak_period_choices = [
     '(6 hours) 2PM to 8PM'
 ];
 const peak_period_inputs = peak_period_choices.map(choice =>
-    <option value={choice} label={choice}></option>
+    <option key={choice} value={choice} label={choice}></option>
 );
 
 const peak_season_choices = ['Summer', 'Summer and Winter']
 const peak_season_inputs = peak_season_choices.map(choice =>
-    <option value={choice} label={choice}></option>
+    <option key={choice} value={choice} label={choice}></option>
 );
 
 export const OPTIONS = {
