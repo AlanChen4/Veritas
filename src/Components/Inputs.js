@@ -6,9 +6,33 @@ import { OPTIONS } from './InputOptions';
 import './Inputs.css';
 
 function Inputs() {
+    const [offPeakA, setOffPeakA] = useState();
+    const [offPeakB, setOffPeakB] = useState();
+    const [peakPriceA, setPeakPriceA] = useState();
+    const [peakPriceB, setPeakPriceB] = useState();
+    const [peakPeriodA, setPeakPeriodA] = useState();
+    const [peakPeriodB, setPeakPeriodB] = useState();
+    const [peakSeasonA, setPeakSeasonA] = useState();
+    const [peakSeasonB, setPeakSeasonB] = useState();
+
+    const handleSubmit = (e) => {
+        const form_data = {
+            offPeakA: offPeakA,
+            offPeakB: offPeakB,
+            peakPriceA: peakPriceA,
+            peakPriceB: peakPriceB,
+            peakPeriodA: peakPeriodA,
+            peakPeriodB: peakPeriodB,
+            peakSeasonA: peakSeasonA,
+            peakSeasonB: peakSeasonB
+        };
+        console.log(form_data);
+        e.preventDefault();
+    }
+
     return (
         <div>
-            <Form className='inputs'>
+            <Form className='inputs' onSubmit={handleSubmit}>
                 <Form.Row>
                     <Form.Group sm={2} as={Col}>
                         <Form.Label>Load Saved</Form.Label>
@@ -21,14 +45,14 @@ function Inputs() {
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Off-Peak Price (A)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setOffPeakA(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.OFF_PEAK}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Off-Peak Price (B)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setOffPeakB(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.OFF_PEAK}
                         </Form.Control>
@@ -38,14 +62,14 @@ function Inputs() {
                     <Form.Group sm={3} as={Col}></Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Price (A)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakPriceA(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_PRICE}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Price (B)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakPriceB(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_PRICE}
                         </Form.Control>
@@ -55,14 +79,14 @@ function Inputs() {
                     <Form.Group sm={3} as={Col}></Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Period (A)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakPeriodA(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_PERIOD}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Period (B)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakPeriodB(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_PERIOD}
                         </Form.Control>
@@ -72,14 +96,14 @@ function Inputs() {
                     <Form.Group sm={3} as={Col}></Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Season (A)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakSeasonA(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_SEASON}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Season (B)</Form.Label>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' onChange={e => setPeakSeasonB(e.target.value)}>
                             <option>Select</option>
                             {OPTIONS.PEAK_SEASON}
                         </Form.Control>
