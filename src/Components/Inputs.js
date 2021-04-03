@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -16,6 +17,8 @@ function Inputs() {
     const [peakSeasonB, setPeakSeasonB] = useState();
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+
         const form_data = {
             offPeakA: offPeakA,
             offPeakB: offPeakB,
@@ -26,8 +29,13 @@ function Inputs() {
             peakSeasonA: peakSeasonA,
             peakSeasonB: peakSeasonB
         };
-        console.log(form_data);
-        e.preventDefault();
+        
+        axios.post(`http://127.0.0.1:8000/api/choice-model/`, { form_data })
+            .then(response => {
+                // TODO: display response
+                console.log(response);
+                console.log(response.data);
+            })
     }
 
     return (
