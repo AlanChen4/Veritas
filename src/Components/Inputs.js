@@ -19,21 +19,23 @@ function Inputs() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const form_data = {
-            offPeakA: offPeakA,
-            offPeakB: offPeakB,
-            peakPriceA: peakPriceA,
-            peakPriceB: peakPriceB,
-            peakPeriodA: peakPeriodA,
-            peakPeriodB: peakPeriodB,
-            peakSeasonA: peakSeasonA,
-            peakSeasonB: peakSeasonB
-        };
-        
-        axios.post(`http://127.0.0.1:8000/api/choice-model/`, { form_data })
+        axios.post(`http://127.0.0.1:8000/api/choice-model/`,
+            // TODO: change so that history_id is gathered from current account
+            {
+                history_id: '7c722fb950264e768ed108f1ba6fbfc3',
+                off_peak_a: offPeakA,
+                off_peak_b: offPeakB,
+                peak_a: peakPriceA,
+                peak_b: peakPriceB,
+                peak_period_a: peakPeriodA,
+                peak_period_b: peakPeriodB,
+                peak_season_a: peakSeasonA,
+                peak_season_b: peakSeasonB
+            }
+        )
             .then(response => {
                 // TODO: display response
-                console.log(response);
+                console.log(response.data.data);
                 console.log(response.data);
             })
     }
