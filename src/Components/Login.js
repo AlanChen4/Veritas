@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios_instance from '../axiosApi';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -10,8 +11,20 @@ function Login() {
         return email.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        try {
+            const response = await axios_instance.post('/account/token/obtain/', {
+                email: email,
+                password: password
+            });
+            axios_instance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            return response;
+        } catch (error) {
+            throw error;
+        }
     }
 
     return (

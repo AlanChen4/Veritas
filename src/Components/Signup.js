@@ -15,8 +15,20 @@ function Signup() {
         return email.length > 0 && username.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        try {
+            const response = await axios_instance.post('account/create/', {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                username: username,
+                password: password
+            });
+            return response
+        } catch (error) {
+            console.log(error.stack);
+        }
     }
 
     return (

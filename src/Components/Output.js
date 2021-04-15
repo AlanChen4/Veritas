@@ -1,27 +1,23 @@
-import React from 'react';
-import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import axios_instance from '../axiosApi';
 import './Output.css';
 
 function ChoiceModel() {
     let [models, setModels] = useState('');
 
-    const fetchModels = useCallback(() => {
-        axios.get(`http://127.0.0.1:8000/api/choice-model/`)
-            .then(res => {
-                setModels(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
-
-    useEffect(() => {
-        fetchModels();
-    }, [fetchModels]);
+    const fetchModels = async () => {
+        try {
+            const response = await axios_instance.get('/api/choice-model/');
+            setModels(response.data);
+            return response.data;
+        } catch (error) {
+            console.log("Error: ", JSON.stringify(error, null, 4));
+            throw error;
+        }
+    }
 
     return (
          <Container fluid className='m-5'>
