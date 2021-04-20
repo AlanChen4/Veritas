@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios_instance from '../axiosApi';
 
-function Login() {
+function Login(props) {
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -21,9 +23,10 @@ function Login() {
             axios_instance.defaults.headers['Authorization'] = "JWT " + response.data.access;
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
-            return response;
+            props.setIsLoggedIn(true);
+            history.push('/model');
         } catch (error) {
-            throw error;
+            console.log(error);
         }
     }
 

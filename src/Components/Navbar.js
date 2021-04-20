@@ -10,7 +10,7 @@ function Navigation(props) {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axios_instance.defaults.headers['Authorization'] = null;
-            return;
+            props.setIsLoggedIn(false);
         } catch (e) {
             console.log(e);
         }

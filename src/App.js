@@ -10,17 +10,19 @@ import Output from './Components/Output';
 import Signup from './Components/Signup';
 
 function App() {
-    const [loggedIn] = useState(localStorage.getItem('access_token'));
+    const [loggedIn, setIsLoggedIn] = useState(localStorage.getItem('access_token'));
 
     return (
         <Router>
             <div>
-                <Navigation loggedIn={loggedIn}/>
+                <Navigation loggedIn={loggedIn} setIsLoggedIn={setIsLoggedIn}/>
                 <Switch>
                     <Route path='/about' component={About}/>
                     <Route path='/contact' component={Contact}/>
                     <Route path='/help' component={Help}/>
-                    <Route path='/login' component={Login}/>
+                    <Route path='/login'>
+                        <Login setIsLoggedIn={setIsLoggedIn}/>
+                    </Route>
                     <Route path='/model' component={Inputs}/>
                     <Route path='/output' component={Output}/>
                     <Route path='/signup' component={Signup}/>
