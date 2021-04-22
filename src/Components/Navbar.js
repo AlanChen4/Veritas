@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios_instance from '../axiosApi';
+import './Navbar.css'
 
 function Navigation(props) {
     async function handleSignOut() {
@@ -17,8 +18,8 @@ function Navigation(props) {
     }
 
     return (
-        <Navbar bg="dark" variant="dark" expand="sm" >
-            <Navbar.Brand href="model">Veritas Economics</Navbar.Brand>
+        <Navbar className='nav-bar' expand="sm" >
+            <Navbar.Brand id='logo' href="model">Veritas Economics</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="container-fluid">
