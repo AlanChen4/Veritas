@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios_instance from '../axiosApi';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -15,6 +16,7 @@ function Inputs() {
     const [peakPeriodB, setPeakPeriodB] = useState();
     const [peakSeasonA, setPeakSeasonA] = useState();
     const [peakSeasonB, setPeakSeasonB] = useState();
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +35,21 @@ function Inputs() {
                     peak_season_b: peakSeasonB
                 }
             )
-            console.log(response);
+            history.push({
+                pathname: '/output',
+                state: {
+                    off_peak_a: response.data.off_peak_a,
+                    off_peak_b: response.data.off_peak_b,
+                    peak_a: response.data.peak_a,
+                    peak_b: response.data.peak_b,
+                    peak_period_a: response.data.peak_period_a,
+                    peak_period_b: response.data.peak_period_b,
+                    peak_season_a: response.data.peak_season_a,
+                    peak_season_b: response.data.peak_season_b,
+                    plan_a: response.data.plan_a,
+                    plan_b: response.data.plan_b
+                }
+            })
         } catch (error) {
             console.log(error);
         }
