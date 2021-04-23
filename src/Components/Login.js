@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios_instance from '../axiosApi';
+import './Auth.css';
 
 function Login(props) {
     const history = useHistory();
@@ -31,7 +32,7 @@ function Login(props) {
     }
 
     return (
-        <div>
+        <div className='auth-form'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group size='lg' controlId='email'>
                     <Form.Label>Email</Form.Label>

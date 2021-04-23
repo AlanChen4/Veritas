@@ -33,7 +33,7 @@ axios_instance.interceptors.response.use(
                     const token_parts = JSON.parse(atob(refresh_token.split('.')[1]));
 
                     const now = Math.ceil(Date.now() / 1000);
-                    console.log(token_parts.exp);
+                    console.log(`Fetched new refresh token: ${token_parts.exp}`);
 
                     if (token_parts.exp > now) {
                         return axios_instance
