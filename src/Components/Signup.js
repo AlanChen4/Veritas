@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import axios_instance from '../axiosApi';
+import './Auth.css';
+
 
 function Signup() {
     const [firstName, setFirstName] = useState("");
@@ -32,7 +34,7 @@ function Signup() {
     }
 
     return (
-        <div>
+        <div className='auth-form'>
             <Form onSubmit={handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} controlId='firstName'>
