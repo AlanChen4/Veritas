@@ -8,10 +8,14 @@ import './Navbar.css'
 function Navigation(props) {
     async function handleSignOut() {
         try {
+            const response = await axios_instance.post('/account/token/blacklist/', {
+                'refresh_token': localStorage.getItem('refresh_token')
+            });
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axios_instance.defaults.headers['Authorization'] = null;
             props.setIsLoggedIn(false);
+            return response;
         } catch (e) {
             console.log(e);
         }
