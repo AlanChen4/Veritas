@@ -23,7 +23,7 @@ function Navigation(props) {
 
     return (
         <Navbar className='nav-bar' expand="sm" >
-            <Navbar.Brand id='logo' href="model">Veritas Economics</Navbar.Brand>
+            <Navbar.Brand href="model">Veritas Economics</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="container-fluid">

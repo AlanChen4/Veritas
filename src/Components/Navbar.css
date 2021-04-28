@@ -2,7 +2,7 @@
     border-bottom: 1px solid gainsboro;
 }
 
-.nav-bar a:after {
+#navbar-nav a:after {
     display: block;
     content: '';
     border-bottom: solid 3px green;
@@ -10,6 +10,6 @@
     transition: transform 250ms ease-in-out;
 }
 
-.nav-bar a:hover:after {
+#navbar-nav a:hover:after {
     transform: scaleX(1);
 }
