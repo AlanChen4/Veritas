@@ -41,10 +41,8 @@ function ChoiceModel(props) {
         <div className='container'>
             <ResponsiveContainer width='100%' height='100%'>
                 <BarChart 
-                    width={500}
-                    height={1000}
                     data={data} 
-                    layout='vertical'
+                    layout='horizontal'
                     margin={{
                         top: 20,
                         right: 30,
