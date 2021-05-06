@@ -17,6 +17,7 @@ function Inputs() {
     const [peakSeasonA, setPeakSeasonA] = useState();
     const [peakSeasonB, setPeakSeasonB] = useState();
     const history = useHistory();
+    const [errorMessage, setErrorMessage] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,12 +52,13 @@ function Inputs() {
                 }
             })
         } catch (error) {
-            console.log(error);
+            setErrorMessage('Please check that all inputs are filled in!');
         }
     }
 
     return (
         <div>
+            {errorMessage && <div className='alert alert-danger'> {errorMessage} </div>}
             <Form className='inputs' onSubmit={handleSubmit}>
                 <Form.Row>
                     <Form.Group sm={2} as={Col}>
