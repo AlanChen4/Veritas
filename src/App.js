@@ -1,4 +1,5 @@
 import React, { useState }from 'react';
+import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import About from './Components/About';
 import Contact from './Components/Contact';
@@ -15,6 +16,11 @@ function App() {
     return (
         <Router>
             <div>
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Veritas</title>
+                    <link rel="canonical" href="" />
+                </Helmet>
                 <Navigation loggedIn={loggedIn} setIsLoggedIn={setIsLoggedIn}/>
                 <Switch>
                     <Route path='/about' component={About}/>
