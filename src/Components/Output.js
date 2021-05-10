@@ -1,12 +1,29 @@
-import React from 'react';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { 
+    Button, 
+    Card, 
+    Container, 
+    Row, 
+    Col,
+    Modal } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import Map from './Map';
+import ModelBarChart from './ModelBarChart';
+import './Output.css';
 
 const Output = (props) => {
     const location = useLocation();
+
+    const [showMap, setShowMap] = useState(false);
+    const handleMap = () => setShowMap(true);
+    const handleCloseMap = () => setShowMap(false);
+
+    const [showBarChart, setShowBarChart] = useState(false);
+    const handleBarChart = () => setShowBarChart(true);
+    const handleCloseBarChart = () => setShowBarChart(false);
+
     return (
         <div>
-            <h2></h2>
             <Container fluid>
                 <Row>
                     <Col xs={12} md={6}>
@@ -17,7 +34,12 @@ const Output = (props) => {
                                 <Card.Text>
                                     Choropleth map with each county shaded to represent total estimated households that will switch over.
                                 </Card.Text>
-                                <Button variant='primary'>Open Map</Button>            
+                                <Button 
+                                    variant='primary'
+                                    onClick={handleMap}
+                                >
+                                    Open Map
+                                </Button>            
                             </Card.Body>
                         </Card>
                     </Col>
@@ -29,12 +51,53 @@ const Output = (props) => {
                                 <Card.Text>
                                     Bar chart with zoom and toolbar to provide more in-depth comparison between the two offered plans.
                                 </Card.Text>
-                                <Button variant='primary'>Open Chart</Button>
+                                <Button 
+                                    variant='primary'
+                                    onClick={handleBarChart}
+                                >
+                                    Open Chart
+                                </Button>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
             </Container>
+
+            <Modal 
+                dialogClassName='component-modal'
+                show={showMap}
+                onHide={handleMap}
+                backdrop='static'
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Map Visualization</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Map />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={handleCloseMap}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal 
+                dialogClassName='component-modal'
+                show={showBarChart}
+                onHide={handleCloseBarChart}
+                backdrop='static'
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Bar Chart</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ModelBarChart location={location} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={handleCloseBarChart}>Close</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
