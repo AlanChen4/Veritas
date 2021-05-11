@@ -66,7 +66,7 @@ const Output = (props) => {
             <Modal 
                 dialogClassName='component-modal'
                 show={showMap}
-                onHide={handleMap}
+                onHide={handleCloseMap}
                 backdrop='static'
                 keyboard={false}
             >

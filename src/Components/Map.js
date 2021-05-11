@@ -9,6 +9,8 @@ const Map = () => {
                 style={{ height: "80vh" }}
                 zoom={8}
                 center={[36, -86]}
+                scrollWheelZoom={false}
+                touchZoom={false}
             >
                 <GeoJSON 
                     data={mapData.features}    
