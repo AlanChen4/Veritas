@@ -25,7 +25,24 @@ const Output = (props) => {
     return (
         <div>
             <Container fluid>
-                <Row>
+                <Row className='mx-1 my-3 justify-content-center'>
+                        <h1>Inputs</h1>
+                </Row>
+                <Row className='mx-1 p-3 border border-primary justify-content-center'>
+                    <Col xs={12} sm={4}>
+                        <p>Off-Peak Price (Plan A): {location.state.off_peak_a}</p>
+                        <p>Peak Price (Plan A): {location.state.peak_a}</p>
+                        <p>Peak Period (Plan A): {location.state.peak_period_a}</p>
+                        <p>Peak Season (Plan A): {location.state.peak_season_a}</p>
+                    </Col>
+                    <Col xs={12} sm={4}>
+                        <p>Off-Peak Price (Plan B): {location.state.off_peak_b}</p>
+                        <p>Peak Price (Plan B): {location.state.peak_b}</p>
+                        <p>Peak Period (Plan B): {location.state.peak_period_b}</p>
+                        <p>Peak Season (Plan B): {location.state.peak_season_b}</p>
+                    </Col>
+                </Row>
+                <Row className='mt-5'>
                     <Col xs={12} md={6}>
                         <Card>
                             <Card.Img variant='top' src='tn_map.png' />
