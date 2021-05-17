@@ -33,7 +33,7 @@ function Navigation(props) {
                     <Nav.Link href='help'>Help</Nav.Link>
                     { props.loggedIn ? null : <Nav.Link className='ml-auto' href='login'>Login</Nav.Link> }
                     { props.loggedIn ? null : <Nav.Link href='signup'>Signup</Nav.Link> }
-                    { props.loggedIn ? <Nav.Link className='ml-auto' href='account'>My Account</Nav.Link> : null }
+                    { props.loggedIn ? <Nav.Link className='ml-auto' href='profile'>My Account</Nav.Link> : null }
                     { props.loggedIn ? <Button onClick={handleSignOut}>Sign Out</Button>: null }
                 </Nav>
             </Navbar.Collapse>

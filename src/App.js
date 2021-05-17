@@ -7,6 +7,7 @@ import Inputs from './Components/Inputs';
 import Login from './Components/Login';
 import Navigation from './Components/Navbar';
 import Output from './Components/Output';
+import Profile from './Components/Profile';
 import Signup from './Components/Signup';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path='/model' component={Inputs}/>
                     <Route path='/output' component={Output}/>
                     <Route path='/signup' component={Signup}/>
+                    <Route path='/profile' component={Profile}/>
                     <Route path='/' component={Inputs}/>
                 </Switch>
             </div>
