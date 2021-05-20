@@ -24,12 +24,14 @@ const Map = () => {
             >
                 <Choropleth 
                     data={mapData}
-                    // valueProperty={(feature) => feature.properties.households}
-                    // scale={['#bfffba', '#11fc00']}
-                    // steps={10}
-                    // mode='e'
-                    // style={style}
-                    // onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.NAME)}
+                    valueProperty={(feature) => feature.properties.households}
+                    scale={['#fff2f2', '#ff0000']}
+                    steps={5}
+                    mode='e'
+                    style={style}
+                    onEachFeature={(feature, layer) => layer.bindPopup(
+                        `${feature.properties.MAPNAME}: ${feature.properties.households}`
+                    )}
                     />
                 </MapContainer>
             </div>
