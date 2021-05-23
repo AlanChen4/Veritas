@@ -14,18 +14,18 @@ export default function Inputs() {
     const history = useHistory();
     const [errorMessage, setErrorMessage] = useState();
 
-    const [historyId, setHistoryId] = useState();
-    const [offPeakA, setOffPeakA] = useState();
-    const [offPeakB, setOffPeakB] = useState();
-    const [peakPriceA, setPeakPriceA] = useState();
-    const [peakPriceB, setPeakPriceB] = useState();
-    const [peakPeriodA, setPeakPeriodA] = useState();
-    const [peakPeriodB, setPeakPeriodB] = useState();
-    const [peakSeasonA, setPeakSeasonA] = useState();
-    const [peakSeasonB, setPeakSeasonB] = useState();
+    const [historyId, setHistoryId] = useState('Select');
+    const [offPeakA, setOffPeakA] = useState('Select');
+    const [offPeakB, setOffPeakB] = useState('Select');
+    const [peakPriceA, setPeakPriceA] = useState('Select');
+    const [peakPriceB, setPeakPriceB] = useState('Select');
+    const [peakPeriodA, setPeakPeriodA] = useState('Select');
+    const [peakPeriodB, setPeakPeriodB] = useState('Select');
+    const [peakSeasonA, setPeakSeasonA] = useState('Select');
+    const [peakSeasonB, setPeakSeasonB] = useState('Select');
 
     const [models, setModels] = useState([]);
-    const [selectedModel, setSelectedModel] = useState();
+    const [selectedModel, setSelectedModel] = useState('Select');
 
     const [inputsNickname, setInputsNickname] = useState('');
     const [showSaveInputs, setShowSaveInputs] = useState(false);
@@ -50,6 +50,7 @@ export default function Inputs() {
                     }
                 );
                 setErrorMessage(false);
+                setSelectedModel(inputsNickname);
             } catch (error) {
                 setErrorMessage('Inputs could not be saved. Please check that all inputs are filled in!');
             }
@@ -62,21 +63,39 @@ export default function Inputs() {
     }
 
     const getModels = async (history_id) => {
-        const models = await axios_instance.get(`/account/${history_id}/models/`);
-        return models;
+            const models = await axios_instance.get(`/account/${history_id}/models/`);
+            return models;
     }
 
     const getModelData = async (model_id) => {
-        const inputData = await axios_instance.get(`/api/choice-model/${model_id}/`);
-        setOffPeakA(inputData.data.off_peak_a);
-        setOffPeakB(inputData.data.off_peak_b);
-        setPeakPriceA(inputData.data.peak_a);
-        setPeakPriceB(inputData.data.peak_b);
-        setPeakPeriodA(inputData.data.peak_period_a);
-        setPeakPeriodB(inputData.data.peak_period_b);
-        setPeakSeasonA(inputData.data.peak_season_a);
-        setPeakSeasonB(inputData.data.peak_season_b);
+        try {
+            const inputData = await axios_instance.get(`/api/choice-model/${model_id}/`);
+            setOffPeakA(inputData.data.off_peak_a);
+            setOffPeakB(inputData.data.off_peak_b);
+            setPeakPriceA(inputData.data.peak_a);
+            setPeakPriceB(inputData.data.peak_b);
+            setPeakPeriodA(inputData.data.peak_period_a);
+            setPeakPeriodB(inputData.data.peak_period_b);
+            setPeakSeasonA(inputData.data.peak_season_a);
+            setPeakSeasonB(inputData.data.peak_season_b);
+            setErrorMessage(false);
+        }
+        catch (error) {
+            setErrorMessage('Invalid saved input selected');
+        }
     }
+
+    const deleteModelData = async (model_id) => {
+        try {
+            await axios_instance.delete(`/api/choice-model/${model_id}/`);
+            setErrorMessage(false);
+            setSelectedModel('Select');
+        }
+        catch (error) {
+            setErrorMessage('Invalid saved input selected');
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -124,7 +143,7 @@ export default function Inputs() {
             });
         });
 
-    }, [showSaveInputs]);
+    }, [selectedModel]);
 
     return (
         <div>
@@ -155,42 +174,46 @@ export default function Inputs() {
             {errorMessage && <div className='alert alert-danger'> {errorMessage} </div>}
             <Form className='inputs' onSubmit={handleSubmit}>
                 <Form.Row>
-                    <Form.Group sm={2} as={Col}>
+                    <Form.Group sm={3} as={Col}>
                         <Form.Label>Load Saved</Form.Label>
-                        <Form.Control as='select' onChange={e => setSelectedModel(e.target.value)}>
-                            <option key='select'>Select</option>
+                        <Form.Control as='select' value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {models.map(m => 
                                 <option key={m.id} value={m.id}>{m.nickname}</option>)
                             }
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group sm={1} as={Col} className='d-flex flex-column'>
-                        <Button onClick={() => getModelData(selectedModel)} className='load-btn mt-auto' variant='outline-primary'>Load</Button>
-                    </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Off-Peak Price (A)</Form.Label>
                         <Form.Control as='select' value={offPeakA} onChange={e => setOffPeakA(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.OFF_PEAK}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Off-Peak Price (B)</Form.Label>
                         <Form.Control as='select' value={offPeakB} onChange={e => setOffPeakB(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.OFF_PEAK}
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group sm={3} as={Col}></Form.Group>
+                    <Form.Group sm={3} as={Col}>
+                        <Button onClick={() => getModelData(selectedModel)} className='load-btn' variant='outline-primary'>Load</Button>
+                        <Button onClick={() => deleteModelData(selectedModel)} className='load-btn' variant='outline-danger'>Delete</Button>
+                    </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Price (A)</Form.Label>
                         <Form.Control as='select' value={peakPriceA} onChange={e => setPeakPriceA(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_PRICE}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Price (B)</Form.Label>
                         <Form.Control as='select' value={peakPriceB} onChange={e => setPeakPriceB(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_PRICE}
                         </Form.Control>
                     </Form.Group>
@@ -200,12 +223,14 @@ export default function Inputs() {
                     <Form.Group as={Col}>
                         <Form.Label>Peak Period (A)</Form.Label>
                         <Form.Control as='select' value={peakPeriodA} onChange={e => setPeakPeriodA(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_PERIOD}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Period (B)</Form.Label>
                         <Form.Control as='select' value={peakPeriodB} onChange={e => setPeakPeriodB(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_PERIOD}
                         </Form.Control>
                     </Form.Group>
@@ -215,12 +240,14 @@ export default function Inputs() {
                     <Form.Group as={Col}>
                         <Form.Label>Peak Season (A)</Form.Label>
                         <Form.Control as='select' value={peakSeasonA} onChange={e => setPeakSeasonA(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_SEASON}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Peak Season (B)</Form.Label>
                         <Form.Control as='select' value={peakSeasonB} onChange={e => setPeakSeasonB(e.target.value)}>
+                            <option key='select' value='Select'>Select</option>
                             {OPTIONS.PEAK_SEASON}
                         </Form.Control>
                     </Form.Group>
