@@ -1,15 +1,45 @@
 .nav-bar {
-    border-bottom: 1px solid gainsboro;
+    box-shadow: 0px 5px 10px gray;
 }
 
 #navbar-nav a:after {
     display: block;
     content: '';
-    border-bottom: solid 3px green;
+    border-bottom: solid 3px #264A99;
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
 }
 
 #navbar-nav a:hover:after {
     transform: scaleX(1);
+}
+
+.font-link {
+    color: #1b1b1c !important;
+    font-family: 'Manrope', sans-serif;
+    font-weight: bold;
+}
+
+.font-profile {
+    color: #264A99 !important;
+    font-family: 'Manrope', sans-serif;
+    font-weight: bold;
+}
+
+.sign-out-btn {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-color: #36579e;
+    border-radius: 20px;
+    background-color: white;
+    height: 2.5rem;
+    width: 6rem;
+    transition: all 0.3s ease 0s;
+    outline: none;
+}
+
+.sign-out-btn:hover {
+    background-color: #264A99;
+    box-shadow: 0px 15px 20px rgba(46, 64, 229, 0.4);;
+    color: white !important;
+    transform: translateY(-5px);
 }

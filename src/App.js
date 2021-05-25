@@ -2,7 +2,6 @@ import React, { useState }from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import About from './Components/About';
 import Contact from './Components/Contact';
-import Help from './Components/Help';
 import Inputs from './Components/Inputs';
 import Login from './Components/Login';
 import Navigation from './Components/Navbar';
@@ -20,7 +19,6 @@ function App() {
                 <Switch>
                     <Route path='/about' component={About}/>
                     <Route path='/contact' component={Contact}/>
-                    <Route path='/help' component={Help}/>
                     <Route path='/login'>
                         <Login setIsLoggedIn={setIsLoggedIn}/>
                     </Route>

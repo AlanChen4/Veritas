@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom';
 import axios_instance from '../axiosApi';
 import {
     Button,
+    Container,
     Col,
     Form,
-    Modal
+    Modal,
+    Row
 } from 'react-bootstrap';
 import { OPTIONS } from './InputOptions';
 import './Inputs.css';
@@ -171,97 +173,135 @@ export default function Inputs() {
                 <Modal.Footer>
                 </Modal.Footer>
             </Modal>
+
             {errorMessage && <div className='alert alert-danger'> {errorMessage} </div>}
-            <Form className='inputs' onSubmit={handleSubmit}>
-                <Form.Row>
-                    <Form.Group sm={3} as={Col}>
-                        <Form.Label>Load Saved</Form.Label>
-                        <Form.Control as='select' value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {models.map(m => 
-                                <option key={m.id} value={m.id}>{m.nickname}</option>)
-                            }
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Off-Peak Price (A)</Form.Label>
-                        <Form.Control as='select' value={offPeakA} onChange={e => setOffPeakA(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.OFF_PEAK}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Off-Peak Price (B)</Form.Label>
-                        <Form.Control as='select' value={offPeakB} onChange={e => setOffPeakB(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.OFF_PEAK}
-                        </Form.Control>
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group sm={3} as={Col}>
-                        <Button onClick={() => getModelData(selectedModel)} className='load-btn' variant='outline-primary'>Load</Button>
-                        <Button onClick={() => deleteModelData(selectedModel)} className='load-btn' variant='outline-danger'>Delete</Button>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Price (A)</Form.Label>
-                        <Form.Control as='select' value={peakPriceA} onChange={e => setPeakPriceA(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_PRICE}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Price (B)</Form.Label>
-                        <Form.Control as='select' value={peakPriceB} onChange={e => setPeakPriceB(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_PRICE}
-                        </Form.Control>
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group sm={3} as={Col}></Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Period (A)</Form.Label>
-                        <Form.Control as='select' value={peakPeriodA} onChange={e => setPeakPeriodA(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_PERIOD}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Period (B)</Form.Label>
-                        <Form.Control as='select' value={peakPeriodB} onChange={e => setPeakPeriodB(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_PERIOD}
-                        </Form.Control>
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group sm={3} as={Col}></Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Season (A)</Form.Label>
-                        <Form.Control as='select' value={peakSeasonA} onChange={e => setPeakSeasonA(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_SEASON}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label>Peak Season (B)</Form.Label>
-                        <Form.Control as='select' value={peakSeasonB} onChange={e => setPeakSeasonB(e.target.value)}>
-                            <option key='select' value='Select'>Select</option>
-                            {OPTIONS.PEAK_SEASON}
-                        </Form.Control>
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group sm={3} as={Col}></Form.Group>
-                    <Form.Group as={Col}>
-                        <Button onClick={() => setShowSaveInputs(true)}variant='outline-secondary'>Save Inputs</Button>
-                    </Form.Group>
-                    <Form.Group as={Col}>
-                        <Button type='submit'>Calculate Model</Button>
-                    </Form.Group>
-                </Form.Row>
-            </Form>
+            <h1 className='font-title mx-5 mt-5'>Choice Model Inputs</h1>
+            <p className='font-text mx-5 mt-3'>Select inputs, or load from previously saved inputs. Selected inputs will be used to calculate the output of the choice model.</p>
+
+           <Container fluid className='mt-3'>
+                <Row>
+                    <Col sm={2} className='input-col'>
+                        <Form>
+                            <Form.Row>
+                                <Form.Group>
+                                    <Form.Label className='font-title'>Load or delete saved inputs</Form.Label>
+                                    <Form.Control className='select-saved' as='select' value={selectedModel} onChange={e => setSelectedModel(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {models.map(m => 
+                                            <option key={m.id} value={m.id}>{m.nickname}</option>)
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Button 
+                                    onClick={() => getModelData(selectedModel)} 
+                                    className='load-btn mr-2' variant='outline-primary'
+                                >
+                                    Load
+                                </Button>
+                                <Button 
+                                    onClick={() => deleteModelData(selectedModel)} 
+                                    className='load-btn' variant='outline-danger'
+                                >
+                                    Delete
+                                </Button>
+                            </Form.Row>
+                        </Form>
+                    </Col>
+                    <Col sm={6} className='input-col'>
+                        <Form>
+                            <Form.Row>
+                                <Form.Label className='font-title'>
+                                    Select inputs
+                                </Form.Label>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group sm={6} as={Col}>
+                                    <Form.Label>
+                                        Off-Peak Price (Plan A)
+                                    </Form.Label>
+                                    <Form.Control 
+                                        as='select' value={offPeakA} 
+                                        onChange={e => setOffPeakA(e.target.value)}
+                                    >
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.OFF_PEAK}
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group sm={6} as={Col}>
+                                    <Form.Label>
+                                        Off-Peak Price (Plan B)
+                                    </Form.Label>
+                                    <Form.Control 
+                                        as='select' value={offPeakA} 
+                                        onChange={e => setOffPeakB(e.target.value)}
+                                    >
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.OFF_PEAK}
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Price (A)</Form.Label>
+                                    <Form.Control as='select' value={peakPriceA} onChange={e => setPeakPriceA(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_PRICE}
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Price (B)</Form.Label>
+                                    <Form.Control as='select' value={peakPriceB} onChange={e => setPeakPriceB(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_PRICE}
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Period (A)</Form.Label>
+                                    <Form.Control as='select' value={peakPeriodA} onChange={e => setPeakPeriodA(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_PERIOD}
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Period (B)</Form.Label>
+                                    <Form.Control as='select' value={peakPeriodB} onChange={e => setPeakPeriodB(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_PERIOD}
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Season (A)</Form.Label>
+                                    <Form.Control as='select' value={peakSeasonA} onChange={e => setPeakSeasonA(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_SEASON}
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Peak Season (B)</Form.Label>
+                                    <Form.Control as='select' value={peakSeasonB} onChange={e => setPeakSeasonB(e.target.value)}>
+                                        <option key='select' value='Select'>Select</option>
+                                        {OPTIONS.PEAK_SEASON}
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>
+                    </Col>
+                    <Col sm={2} className='input-col mb-5'>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Row>
+                                <Form.Label className='font-title'>Output</Form.Label>
+                            </Form.Row>
+                            <Button type='submit' variant='outline-success' className='mt-4 load-btn'>Calculate</Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios_instance from '../axiosApi';
@@ -23,18 +22,23 @@ function Navigation(props) {
 
     return (
         <Navbar className='nav-bar' expand="sm" >
-            <Navbar.Brand href="model">Veritas Economics</Navbar.Brand>
+            <Navbar.Brand href="model">
+                <img 
+                    src='/logo.png'
+                    height='50'
+                    alt='Veritas Economics logo'
+                />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="container-fluid">
-                    <Nav.Link href='model'>Choice Model</Nav.Link>
-                    <Nav.Link href='contact'>Contact</Nav.Link>
-                    <Nav.Link href='about'>About</Nav.Link>
-                    <Nav.Link href='help'>Help</Nav.Link>
+                    <Nav.Link className='font-link ml-auto' href='model'>model</Nav.Link>
+                    <Nav.Link className='font-link' href='contact'>contact</Nav.Link>
+                    <Nav.Link className='font-link' href='about'>about</Nav.Link>
                     { props.loggedIn ? null : <Nav.Link className='ml-auto' href='login'>Login</Nav.Link> }
                     { props.loggedIn ? null : <Nav.Link href='signup'>Signup</Nav.Link> }
-                    { props.loggedIn ? <Nav.Link className='ml-auto' href='profile'>My Account</Nav.Link> : null }
-                    { props.loggedIn ? <Button onClick={handleSignOut}>Sign Out</Button>: null }
+                    { props.loggedIn ? <Nav.Link className='font-profile ml-5' href='profile'>Profile</Nav.Link> : null }
+                    { props.loggedIn ? <button className='font-profile sign-out-btn' onClick={handleSignOut}>Sign Out</button>: null }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
