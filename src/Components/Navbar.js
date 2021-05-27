@@ -32,12 +32,14 @@ function Navigation(props) {
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="container-fluid">
-                    <Nav.Link className='font-link ml-auto' href='model'>model</Nav.Link>
+                    <Nav.Link className='ml-auto' />
+                    <Nav.Link className='font-link' href='model'>model</Nav.Link>
                     <Nav.Link className='font-link' href='contact'>contact</Nav.Link>
                     <Nav.Link className='font-link' href='about'>about</Nav.Link>
-                    { props.loggedIn ? null : <Nav.Link className='ml-auto' href='login'>Login</Nav.Link> }
-                    { props.loggedIn ? null : <Nav.Link href='signup'>Signup</Nav.Link> }
-                    { props.loggedIn ? <Nav.Link className='font-profile ml-5' href='profile'>Profile</Nav.Link> : null }
+                    { props.loggedIn ? null : <Nav.Link className='ml-4'/> }
+                    { props.loggedIn ? null : <Nav.Link className='font-profile' href='login'>Login</Nav.Link> }
+                    { props.loggedIn ? null : <Nav.Link className='font-profile' href='signup'>Sign Up</Nav.Link> }
+                    { props.loggedIn ? <Nav.Link className='font-profile' href='profile'>Profile</Nav.Link> : null }
                     { props.loggedIn ? <button className='font-profile sign-out-btn' onClick={handleSignOut}>Sign Out</button>: null }
                 </Nav>
             </Navbar.Collapse>

@@ -24,7 +24,9 @@ function App() {
                     </Route>
                     <Route path='/model' component={Inputs}/>
                     <Route path='/output' component={Output}/>
-                    <Route path='/signup' component={Signup}/>
+                    <Route path='/signup'>
+                        <Signup setIsLoggedIn={setIsLoggedIn} />
+                    </Route>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/' component={Inputs}/>
                 </Switch>
