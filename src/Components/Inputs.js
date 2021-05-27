@@ -65,8 +65,8 @@ export default function Inputs() {
     }
 
     const getModels = async (history_id) => {
-            const models = await axios_instance.get(`/account/${history_id}/models/`);
-            return models;
+        const models = await axios_instance.get(`/account/${history_id}/models/`);
+        return models;
     }
 
     const getModelData = async (model_id) => {
@@ -165,8 +165,8 @@ export default function Inputs() {
                             <Form.Label>Nickname for these inputs</Form.Label>
                             <Form.Control onChange={e => setInputsNickname(e.target.value)} placeholder='Enter nickname' value={inputsNickname} />
                         </Form.Group>
-                        <Button type='submit'>
-                            Save Inputs
+                        <Button variant='outline-primary' className='load-btn' type='submit'>
+                            Save
                         </Button>
                     </Form>
                 </Modal.Body>
@@ -289,6 +289,15 @@ export default function Inputs() {
                                         {OPTIONS.PEAK_SEASON}
                                     </Form.Control>
                                 </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Button 
+                                    className='load-btn' 
+                                    onClick={() => setShowSaveInputs(true)} 
+                                    variant='outline-secondary'
+                                >
+                                    Save Inputs
+                                </Button>
                             </Form.Row>
                         </Form>
                     </Col>
