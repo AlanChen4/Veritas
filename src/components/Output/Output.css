@@ -1,0 +1,13 @@
+.component-modal {
+    width: 90vw !important;
+    max-width: 90vw !important;
+}
+
+.card-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: bold !important;
+}
+
+.card-text {
+    font-family: 'Manrope', sans-serif;
+}

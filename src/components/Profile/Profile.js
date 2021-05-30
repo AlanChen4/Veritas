@@ -4,15 +4,15 @@ import {
     Button, 
     Form, 
     Col } from 'react-bootstrap';
-import axios_instance from '../axiosApi';
 import './Profile.css';
+import { authRequest } from '../../api/auth.js';
 
 const getProfileData = async () => {
-    const profileData = await axios_instance.get('/account/profile/');
+    const profileData = await authRequest.get('/account/profile/');
     return profileData;
 }
 
-const Profile = () => {
+export default function Profile() {
     const [historyId, setHistoryId] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ const Profile = () => {
     const [lastName, setLastName] = useState('');
     const [updatedInfo, setUpdatedInfo] = useState(false);
 
-    const loadProfileData = async (data) => {
+    const loadProfileData = (data) => {
         setHistoryId(data.history_id);
         setEmail(data.email);
         setUsername(data.username);
@@ -35,8 +35,8 @@ const Profile = () => {
         );
     }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
         const updatedData = {
             'email': email,
@@ -46,7 +46,7 @@ const Profile = () => {
 
         }
 
-        await axios_instance.put(`/account/profile/${historyId}/`, updatedData);
+        await authRequest.put(`/account/profile/${historyId}/`, updatedData);
         setUpdatedInfo(true);
     }
 
@@ -93,5 +93,3 @@ const Profile = () => {
         </div>
     );
 }
-
-export default Profile;

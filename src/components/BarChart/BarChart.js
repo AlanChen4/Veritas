@@ -8,8 +8,9 @@ import {
     YAxis,
     ReferenceLine,
     Tooltip,
-    Legend } from 'recharts';
-import './ModelBarChart.css';
+    Legend
+} from 'recharts';
+import './BarChart.css';
 
 function formatData(data) {
     const ret = [];
@@ -35,7 +36,7 @@ function formatData(data) {
 }
 
 
-function ModelBarChart(props) {
+export default function ModelBarChart(props) {
     const data = formatData({
         plan_a: props.location.state.plan_a,
         plan_b: props.location.state.plan_b
@@ -66,5 +67,3 @@ function ModelBarChart(props) {
         </div>
     );
 }
-
-export default ModelBarChart;

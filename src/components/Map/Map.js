@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { MapContainer} from 'react-leaflet';
 import Choropleth from 'react-leaflet-choropleth';
-import mapData from '../Data/map.json';
+import mapData from '../../data/map.json';
 
 const style = {
     fillColor: '#F39F3B',
@@ -12,7 +13,7 @@ const style = {
     fillOpacity: 0.5
 }
 
-const Map = () => {
+export default function Map() {
     return (
         <div>
             <MapContainer
@@ -37,5 +38,3 @@ const Map = () => {
             </div>
         );
 }
-
-export default Map;

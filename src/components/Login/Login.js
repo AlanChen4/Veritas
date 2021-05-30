@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import './Login.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios_instance from '../axiosApi';
-import './Auth.css';
 
-function Login(props) {
+import { UserContext } from '../../contexts/userContext.js';
+import { loginUser } from '../../api/auth.js';
+
+import { ACCESS_TOKEN } from '../../api/auth.js';
+
+export default function Login(props) {
     const history = useHistory();
+
+    // eslint-disable-next-line no-unused-vars
+    const {user, setUser} = useContext(UserContext)
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function validateForm() {
+    const validateForm = () => {
         return email.length > 0 && password.length > 0;
     }
 
-    async function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        try {
-            const response = await axios_instance.post('/account/token/obtain/', {
-                email: email,
-                password: password
-            });
-            axios_instance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            props.setIsLoggedIn(true);
-            history.push('/model');
-        } catch (error) {
-            console.log(error);
-        }
+        loginUser(email, password)
+            .then((data) => {
+                setUser(localStorage.getItem(ACCESS_TOKEN));
+                history.push('/');
+            }).catch((error) => {
+                alert(error);
+            })
     }
 
     return (
@@ -51,12 +54,15 @@ function Login(props) {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button block size='lg' type='submit' disabled={!validateForm()}>
+                <Button 
+                    block size='md' type='submit' 
+                    disabled={!validateForm()}
+                    variant='outline-primary'
+                    className='load-btn'
+                >
                     Login
                 </Button>
             </Form>
         </div>
     );
 }
-
-export default Login;
