@@ -6,6 +6,7 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
+import PrivateRoute from '../../components/PrivateRoute/PrivateRoute.js';
 
 import Navigation from '../../components/Navbar/Navbar.js';
 import AboutPage from '../../pages/AboutPage.js';
@@ -29,7 +30,7 @@ function App() {
                     <Route path='/about' component={AboutPage} />
                     <Route path='/contact' component={ContactPage} />
                     <Route path='/login' component={LoginPage} />
-                    <Route path='/inputs' component={InputsPage} />
+                    <PrivateRoute path='/model' component={InputsPage} />
                     <Route path='/output' component={OutputPage} />
                     <Route path='/signup' component={SignupPage} />
                     <Route path='/profile' component={ProfilePage} />
