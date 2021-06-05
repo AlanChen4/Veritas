@@ -22,7 +22,7 @@ export default function Navigation() {
 
     return (
         <Navbar className='nav-bar' expand="sm" >
-            <Navbar.Brand href="model">
+            <Navbar.Brand href="/">
                 <img 
                     src='/logo.png'
                     height='50'
