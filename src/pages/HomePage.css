@@ -1,0 +1,31 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 100px;
+  color: blue;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 100px;
+  color: blue;
+}
+
+.carousel-caption {
+    font-family: 'manrope', sans-serif;
+    font-weight: bold;
+    color: black;
+}
+
+.carousel-item img{
+    width: 100%;
+    height: auto;
+}
