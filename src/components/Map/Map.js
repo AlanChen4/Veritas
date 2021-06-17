@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MapContainer} from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import Choropleth from 'react-leaflet-choropleth';
 import mapData from '../../data/mapData.json';
 
@@ -23,6 +23,10 @@ export default function Map() {
                 scrollWheelZoom={false}
                 touchZoom={false}
             >
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
                 <Choropleth 
                     data={mapData}
                     valueProperty={(feature) => feature.properties.households}
@@ -33,8 +37,8 @@ export default function Map() {
                     onEachFeature={(feature, layer) => layer.bindPopup(
                         `${feature.properties.MAPNAME}: ${feature.properties.households}`
                     )}
-                    />
-                </MapContainer>
+                />
+            </MapContainer>
             </div>
         );
 }
