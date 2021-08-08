@@ -13,7 +13,10 @@ This web application implements a logit [discrete choice model](https://eml.berk
 
   
   
-## Usage
+## Screenshots
+![Inputs](public/inputs.png)
+![Choropleth Map](public/choropleth_map.png)
+![Bar Chart](public/model_bar_chart.png)
 
   
 ## Tech Stack
